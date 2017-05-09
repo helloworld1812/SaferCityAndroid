@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SaferCity</string>
     <string name="action_settings">Settings</string>
-    <string name="label_reports_list">Reports List</string>
+
+    <string name="label_reports_list">Reported Events</string>
+    <string name="label_create_report">New Report</string>
 </resources>
