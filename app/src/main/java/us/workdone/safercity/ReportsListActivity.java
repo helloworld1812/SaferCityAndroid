@@ -5,13 +5,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import us.workdone.safercity.model.Report;
+import us.workdone.safercity.model.ReportsListAdapter;
 
 public class ReportsListActivity extends AppCompatActivity {
 
     private ListView listView;
-    private ArrayAdapter adapter;
+    private ReportsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +30,15 @@ public class ReportsListActivity extends AppCompatActivity {
         fab.setOnClickListener(this::createReport);
 
         listView = (ListView) findViewById(R.id.reportsList);
-        adapter = new ArrayAdapter(this, 1);
+        adapter = new ReportsListAdapter(this);
+        listView.setAdapter(adapter);
     }
 
     public void createReport(View view) {
-
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+        adapter.add(new Report("here", cal.getTime(), "SHIT HAPPENED", "suddenly they were like oh my god no why is this happening yo"));
     }
 
 //

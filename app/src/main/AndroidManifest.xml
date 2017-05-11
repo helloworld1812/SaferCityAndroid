@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="us.workdone.safercity">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,11 +21,11 @@
             </intent-filter>
         </activity>
 
-         <!--<activity -->
-         <!--android:name=".CreateReportActivity" -->
-         <!--android:label="@string/label_create_report" -->
-         <!--android:theme="@style/AppTheme.NoActionBar"> -->
-         <!--</activity> -->
+         <activity
+         android:name=".CreateReportActivity"
+         android:label="@string/label_create_report"
+         android:theme="@style/AppTheme.NoActionBar">
+         </activity>
 
     </application>
 
