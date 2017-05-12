@@ -51,8 +51,8 @@ public class ReportsListAdapter extends ArrayAdapter<Report> {
                 DateUtils.formatSameDayTime(
                         item.time.getTime(),
                         new Date().getTime(),
-                        DateFormat.MEDIUM,
-                        DateFormat.SHORT)); // format date pretty
+                        DateFormat.DEFAULT,
+                        DateFormat.SHORT));
         return v;
     }
 

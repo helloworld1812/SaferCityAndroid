@@ -32,6 +32,11 @@ public class ReportsListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.reportsList);
         adapter = new ReportsListAdapter(this);
         listView.setAdapter(adapter);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE, -3);
+        adapter.add(new Report("here", cal.getTime(), "SHIT HAPPENED", "suddenly they were like oh my god no why is this happening yo"));
     }
 
     public void createReport(View view) {

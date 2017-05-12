@@ -4,4 +4,14 @@
 
     <string name="label_reports_list">Reported Events</string>
     <string name="label_create_report">New Report</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="max_length_short">80</string>
+    <string name="max_length_long">280</string>
+    <string name="hint_title_create_report">What happened?</string>
+    <string name="hint_location_create_report">Where did it happen?</string>
+    <string name="hint_time_create_report">When did it happen?</string>
+    <string name="hint_details_create_report">Any more details?</string>
+
+
 </resources>

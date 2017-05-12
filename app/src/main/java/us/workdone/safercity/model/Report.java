@@ -17,7 +17,7 @@ public class Report {
         this.time = time;
         this.title = title;
         this.details = details;
-        this.isDangerous = true;
+        this.isDangerous = false;
     }
 
 }
