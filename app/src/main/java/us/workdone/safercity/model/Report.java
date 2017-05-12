@@ -5,14 +5,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import us.workdone.safercity.GlobalUtils;
 
 public class Report {
 
@@ -23,6 +16,14 @@ public class Report {
     public final Date time;
 
     public final boolean isDangerous;
+
+    private static final String TITLE = "name";
+    private static final String DETAILS = "eventDescription";
+
+    private static final String LOCATION = "place";
+    private static final String TIME = "time";
+
+    private static final String IS_DANGEROUS = "dangerous";
 
     public Report(String title, String location, Date time, String details) {
         this.location = location;
@@ -35,11 +36,11 @@ public class Report {
     public JSONObject toJSON() {
         try {
             return new JSONObject()
-                    .put("title", title)
-                    .put("details", details)
-                    .put("location", location)
-                    .put("is_dangerous", isDangerous)
-                    .put("time", ISODateTimeFormat.dateTimeNoMillis().print(new DateTime(time)));
+                    .put(TITLE, title)
+                    .put(DETAILS, details)
+                    .put(LOCATION, location)
+                    .put(IS_DANGEROUS, isDangerous)
+                    .put(TIME, ISODateTimeFormat.dateTimeNoMillis().print(new DateTime(time)));
         } catch (JSONException e) {
             throw new IllegalStateException(e); // should not happen
         }
@@ -49,10 +50,10 @@ public class Report {
         try {
             System.out.println(data.getString("time"));
             return new Report(
-                    data.getString("title"),
-                    data.getString("location"),
-                    ISODateTimeFormat.dateTime().parseDateTime(data.getString("time")).toDate(),
-                    data.getString("details")
+                    data.getString(TITLE),
+                    data.getString(LOCATION),
+                    ISODateTimeFormat.dateTimeParser().parseDateTime(data.getString(TIME)).toDate(),
+                    data.getString(DETAILS)
             );
         } catch (JSONException                                                                                                                                                                                 e) {
             throw new RuntimeException(e);

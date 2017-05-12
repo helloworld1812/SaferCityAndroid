@@ -83,8 +83,8 @@ public class CreateReportActivity extends AppCompatActivity {
 
         );
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST,
-                "http://api.workdone.us/reports", newReport.toJSON(),
-                System.out::println, System.out::println);
+                GlobalUtils.BACKEND_URL, newReport.toJSON(),
+                System.out::println, e -> e.printStackTrace());
         GlobalUtils.getInstance(this).addToRequestQueue(req);
         finish();
     }

@@ -10,14 +10,16 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="83dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintLeft_toRightOf="@+id/unreadMarker"
+        app:layout_constraintRight_toLeftOf="@+id/dangerousMarker"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Shots Fired" />
 
@@ -25,13 +27,13 @@
         android:id="@+id/unreadMarker"
         android:layout_width="8dp"
         android:layout_height="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="22dp"
         android:contentDescription=""
         android:cropToPadding="false"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/unread" />
+        app:srcCompat="@drawable/unread"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:id="@+id/dangerousMarker"
@@ -46,30 +48,30 @@
 
     <TextView
         android:id="@+id/locationText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorText"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
-        tools:text="74 Jeramie Wall Suite 277" />
+        tools:text="74 Jeramie Wall Suite 277"
+        app:layout_constraintRight_toLeftOf="@+id/dangerousMarker"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/timeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorText"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/locationText"
+        app:layout_constraintLeft_toLeftOf="@+id/locationText"
         app:layout_constraintTop_toBottomOf="@+id/locationText"
         tools:text="01:18 PM" />
 
@@ -78,24 +80,23 @@
         android:layout_width="wrap_content"
         android:layout_height="14dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/locationText"
-        app:layout_constraintEnd_toStartOf="@+id/locationText"
+        app:layout_constraintRight_toLeftOf="@+id/locationText"
         app:layout_constraintTop_toTopOf="@+id/locationText"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pin_small"
-        tools:layout_editor_absoluteX="32dp" />
+        app:srcCompat="@drawable/pin_small" />
 
     <ImageView
         android:id="@+id/timeMarker"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/timeText"
-        app:layout_constraintEnd_toStartOf="@+id/timeText"
+        app:layout_constraintRight_toLeftOf="@+id/timeText"
         app:layout_constraintTop_toTopOf="@+id/timeText"
         app:srcCompat="@drawable/clock_small"
         tools:layout_editor_absoluteX="32dp" />
@@ -104,13 +105,13 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="12dp"
         android:background="@color/colorDivider"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <TextView
@@ -118,14 +119,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="12dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:text="I was just chilling and heard 6 to 7 shots. No screams be careful." />
 </android.support.constraint.ConstraintLayout>

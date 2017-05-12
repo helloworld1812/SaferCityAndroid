@@ -9,17 +9,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 public class GlobalUtils {
     private static GlobalUtils mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private static Context mCtx;
+    public static final String BACKEND_URL = "https://fake-json-service.now.sh/event";
+
 
     private GlobalUtils(Context context) {
         mCtx = context;
