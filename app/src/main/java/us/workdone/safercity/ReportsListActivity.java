@@ -1,5 +1,6 @@
 package us.workdone.safercity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +8,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
-import java.util.Calendar;
-import java.util.Date;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import us.workdone.safercity.model.Report;
 import us.workdone.safercity.model.ReportsListAdapter;
 
 public class ReportsListActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CREATE_REPORT = 1;
 
     private ListView listView;
     private ReportsListAdapter adapter;
@@ -32,18 +44,39 @@ public class ReportsListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.reportsList);
         adapter = new ReportsListAdapter(this);
         listView.setAdapter(adapter);
+        sendUpdateListReq();
+    }
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.MINUTE, -3);
-        adapter.add(new Report("here", cal.getTime(), "SHIT HAPPENED", "suddenly they were like oh my god no why is this happening yo"));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendUpdateListReq();
     }
 
     public void createReport(View view) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.DAY_OF_YEAR, -1);
-        adapter.add(new Report("here", cal.getTime(), "SHIT HAPPENED", "suddenly they were like oh my god no why is this happening yo"));
+        Intent intent = new Intent(this, CreateReportActivity.class);
+        startActivity(intent);
+    }
+
+    private void sendUpdateListReq() {
+        Request req = new JsonObjectRequest(Request.Method.GET, "http://api.workdone.us/reports",
+                null, this::updateList, System.out::println);
+        GlobalUtils.getInstance(this).addToRequestQueue(req);
+    }
+
+    private void updateList(JSONObject resp) {
+        try {
+            JSONArray data = resp.getJSONArray("data");
+            List<Report> lst = new ArrayList<>();
+            for (int i = 0; i < data.length(); i++) {
+                lst.add(Report.fromJSON(data.getJSONObject(i)));
+            }
+            Collections.reverse(lst);
+            adapter.clear();
+            adapter.addAll(lst);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 //

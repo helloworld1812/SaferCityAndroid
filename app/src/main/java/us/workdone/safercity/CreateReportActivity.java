@@ -14,9 +14,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.text.format.DateUtils;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import static android.text.format.DateUtils.*;
 
 import java.util.Calendar;
+
+import us.workdone.safercity.model.Report;
 
 public class CreateReportActivity extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class CreateReportActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setSelectedTime(int hourOfDay, int minute) {
@@ -66,6 +72,21 @@ public class CreateReportActivity extends AppCompatActivity {
     }
     public void pickTime(View v) {
         new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void submitReport(View v) {
+        Report newReport = new Report(
+                ((TextView) findViewById(R.id.inputTitle)).getText().toString(),
+                ((TextView) findViewById(R.id.inputLocation)).getText().toString(),
+                selectedCal.getTime(),
+                ((TextView) findViewById(R.id.inputDetails)).getText().toString()
+
+        );
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST,
+                "http://api.workdone.us/reports", newReport.toJSON(),
+                System.out::println, System.out::println);
+        GlobalUtils.getInstance(this).addToRequestQueue(req);
+        finish();
     }
 
     public static class TimePickerFragment extends DialogFragment
