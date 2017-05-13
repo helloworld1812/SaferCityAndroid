@@ -14,7 +14,8 @@ android {
         jackOptions {
             enabled true
         }
-        versionCode 2
+        versionCode 3
+        versionNameSuffix '0.3'
     }
     buildTypes {
         release {

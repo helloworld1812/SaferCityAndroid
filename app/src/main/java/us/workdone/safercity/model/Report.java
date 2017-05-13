@@ -30,7 +30,7 @@ public class Report {
         this.time = time;
         this.title = title;
         this.details = details;
-        this.isDangerous = false;
+        this.isDangerous = true;
     }
 
     public JSONObject toJSON() {

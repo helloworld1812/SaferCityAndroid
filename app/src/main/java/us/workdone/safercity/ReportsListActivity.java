@@ -27,6 +27,8 @@ import us.workdone.safercity.model.ReportsListAdapter;
 
 public class ReportsListActivity extends AppCompatActivity {
 
+    // TODO ellipses for truncated details view
+
     private ListView listView;
     private ReportsListAdapter adapter;
     private View refreshActionItem;
