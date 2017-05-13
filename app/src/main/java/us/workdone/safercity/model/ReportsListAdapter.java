@@ -45,7 +45,14 @@ public class ReportsListAdapter extends ArrayAdapter<Report> {
         TextView time = (TextView) v.findViewById(R.id.timeText);
 
         title.setText(item.title);
-        details.setText(item.details);
+        if (item.details.trim().isEmpty()) {
+            details.setVisibility(View.GONE);
+            v.findViewById(R.id.divider).setVisibility(View.INVISIBLE);
+        } else {
+            details.setText(item.details.trim());
+            details.setVisibility(View.VISIBLE);
+            v.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+        }
         location.setText(item.location);
         time.setText(
                 DateUtils.formatSameDayTime(

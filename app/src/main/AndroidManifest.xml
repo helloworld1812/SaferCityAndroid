@@ -23,7 +23,7 @@
             android:name=".CreateReportActivity"
             android:label="@string/label_create_report"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".ReportsListActivity" >
+            android:parentActivityName=".ReportsListActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

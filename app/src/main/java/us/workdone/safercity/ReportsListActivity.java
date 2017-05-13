@@ -8,15 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,10 +27,9 @@ import us.workdone.safercity.model.ReportsListAdapter;
 
 public class ReportsListActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CREATE_REPORT = 1;
-
     private ListView listView;
     private ReportsListAdapter adapter;
+    private View refreshActionItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +45,14 @@ public class ReportsListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.reportsList);
         adapter = new ReportsListAdapter(this);
         listView.setAdapter(adapter);
-        sendUpdateListReq();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        sendUpdateListReq();
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (hasFocus) {
+            refreshActionItem = findViewById(R.id.actionRefresh);
+            sendUpdateListReq();
+        }
     }
 
     public void createReport(View view) {
@@ -61,6 +61,12 @@ public class ReportsListActivity extends AppCompatActivity {
     }
 
     private void sendUpdateListReq() {
+        Animation animation = new RotateAnimation(0.0f, 360.0f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+            0.5f);
+        animation.setRepeatCount(-1);
+        animation.setDuration(1000);
+        refreshActionItem.startAnimation(animation);
         Request req = new JsonArrayRequest(Request.Method.GET, GlobalUtils.BACKEND_URL,
                 null, this::updateList, e -> e.printStackTrace());
         GlobalUtils.getInstance(this).addToRequestQueue(req);
@@ -75,31 +81,28 @@ public class ReportsListActivity extends AppCompatActivity {
             Collections.reverse(lst);
             adapter.clear();
             adapter.addAll(lst);
+            refreshActionItem.clearAnimation();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.actionRefresh:
+                sendUpdateListReq();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_reports_list, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

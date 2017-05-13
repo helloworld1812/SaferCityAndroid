@@ -6,9 +6,8 @@
 
     <!-- refresh should appear as action button -->
     <item
-        android:id="@+id/actionRefresh"
-        android:icon="@android:drawable/stat_notify_sync"
-        android:title="@string/menu_title_refresh"
+        android:id="@+id/actionPostReport"
+        android:title="@string/menu_title_post_report"
         app:showAsAction="ifRoom"/>
 
 </menu>

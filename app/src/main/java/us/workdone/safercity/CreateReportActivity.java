@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -24,6 +26,15 @@ import java.util.Calendar;
 import us.workdone.safercity.model.Report;
 
 public class CreateReportActivity extends AppCompatActivity {
+
+
+    /*
+    todo
+    tabbing to next focus should include date
+    allow scrolling when soft keyboard is out
+    keep toolbar in place when soft keyboard is out
+    input validation (eg should not allow extension beyond charlimit)
+     */
 
     private Calendar selectedCal;
     private TextView selectedDateTime;
@@ -74,7 +85,7 @@ public class CreateReportActivity extends AppCompatActivity {
         new TimePickerFragment().show(getSupportFragmentManager(), "timePicker");
     }
 
-    public void submitReport(View v) {
+    public void submitReport() {
         Report newReport = new Report(
                 ((TextView) findViewById(R.id.inputTitle)).getText().toString(),
                 ((TextView) findViewById(R.id.inputLocation)).getText().toString(),
@@ -87,6 +98,24 @@ public class CreateReportActivity extends AppCompatActivity {
                 System.out::println, e -> e.printStackTrace());
         GlobalUtils.getInstance(this).addToRequestQueue(req);
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.actionPostReport:
+                submitReport();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_create_report, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public static class TimePickerFragment extends DialogFragment

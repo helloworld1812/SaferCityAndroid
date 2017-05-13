@@ -13,5 +13,7 @@
     <string name="hint_time_create_report">When did it happen?</string>
     <string name="hint_details_create_report">Any more details?</string>
 
+    <string name="menu_title_refresh">Refresh</string>
+    <string name="menu_title_post_report">REPORT</string>
 
 </resources>
