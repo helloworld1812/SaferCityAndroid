@@ -48,14 +48,13 @@ public class Report {
 
     public static Report fromJSON(JSONObject data) {
         try {
-            System.out.println(data.getString("time"));
             return new Report(
                     data.getString(TITLE),
                     data.getString(LOCATION),
                     ISODateTimeFormat.dateTimeParser().parseDateTime(data.getString(TIME)).toDate(),
                     data.getString(DETAILS)
             );
-        } catch (JSONException                                                                                                                                                                                 e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }

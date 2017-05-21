@@ -15,6 +15,8 @@ import us.workdone.safercity.R;
 
 public class ReportsListAdapter extends ArrayAdapter<Report> {
 
+    // todo sort list
+
     private static final int LAYOUT_RES = R.layout.list_item_report;
 
     public ReportsListAdapter(Context context) {

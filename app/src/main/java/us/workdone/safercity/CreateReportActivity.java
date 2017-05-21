@@ -27,7 +27,6 @@ import us.workdone.safercity.model.Report;
 
 public class CreateReportActivity extends AppCompatActivity {
 
-
     /*
     todo
     tabbing to next focus should include date
